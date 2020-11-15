@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favorite</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div *ngFor="let book of favoriteBooks">
+
+
+    <ion-card>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="book.user.imgUrl">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{book.user.name}}</h3>
+          <p>Dec 10, 2019</p>
+        </ion-label>
+      </ion-item>
+
+      <img class="img-book" *ngIf="book.imgUrl" [src]="book.imgUrl" alt="ion" (click)="onBookClicked(book)">
+
+      <!-- <div *ngIf="!book.imgUrl" class="imgTxtCenter">
+        <img class="card-img-top" style="background-color:lightskyblue;">
+        <div class="centered" style="color:darkblue">{{book.title}}</div>
+      </div> -->
+
+      <ion-card-header (click)="onBookClicked(book)">
+        <ion-item lines="none" detail>
+          <ion-card-title>{{book.title}}</ion-card-title>
+        </ion-item>
+
+      </ion-card-header>
+      <ion-card-content>
+        {{book.description}}
+      </ion-card-content>
+
+      <ion-footer>
+        <ion-row>
+          <ion-col center text-center>
+            <!-- <button>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>1.5k Likes</div>
+            </button> -->
+          </ion-col>
+          <ion-col center text-center>
+            <!-- <button>
+              <ion-icon name="text"></ion-icon>
+              <div>4 Comments</div>
+            </button> -->
+          </ion-col>
+
+          <ion-col center text-center>
+            <ion-item lines="none">
+              <ion-icon name="trash-outline" style="font-size: 30px;color: red;" (click)="onRemoveClicked(book)" ></ion-icon>
+              <span style="font-size: x-small;">Remove Favorite</span>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+      </ion-footer>
+    </ion-card>
+
+
+  </div>
+
+</ion-content>
